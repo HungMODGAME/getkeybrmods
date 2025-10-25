@@ -1,76 +1,106 @@
-/* Thiết lập cơ bản */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background: linear-gradient(135deg, #1f4068, #162447); /* Màu nền bắt mắt */
-    color: #fff;
-    text-align: center;
 }
 
 .container {
-    background-color: #2c394b;
-    padding: 40px 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
     max-width: 400px;
-    width: 90%;
+    text-align: center;
 }
 
-h1 {
-    color: #a4ebf3;
+.header {
     margin-bottom: 20px;
 }
 
-p {
-    margin-bottom: 30px;
+.logo {
+    width: 80px; /* Điều chỉnh kích thước logo */
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
 }
 
-/* Nút Tạo Key */
-#generateKeyBtn {
-    background-color: #ff652f;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 8px;
-    font-size: 1.1em;
+h1 {
+    color: #333;
+    font-size: 1.5em;
+    margin-top: 0;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
     font-weight: bold;
+    color: #555;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#generate-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    outline: none;
-    box-shadow: 0 4px 15px rgba(255, 101, 47, 0.4);
+    font-size: 1em;
+    transition: background-color 0.3s;
+    width: 100%;
 }
 
-#generateKeyBtn:hover {
-    background-color: #e55a29;
-    transform: translateY(-2px);
+#generate-button:hover {
+    background-color: #0056b3;
 }
 
-#generateKeyBtn:disabled {
-    background-color: #777;
-    cursor: not-allowed;
-    box-shadow: none;
-}
-
-/* Hiệu ứng Loading (Vòng tròn xoay) */
-#loader {
-    margin-top: 30px;
+/* --- Loading Spinner CSS --- */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9); /* Lớp phủ mờ */
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    z-index: 1000;
+    flex-direction: column;
+}
+
+.spinner-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .spinner {
-    border: 5px solid #f3f3f3; /* Light grey */
-    border-top: 5px solid #00cfd8; /* Blue */
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #007bff; /* Blue */
     border-radius: 50%;
     width: 40px;
     height: 40px;
     animation: spin 1s linear infinite;
-    margin-bottom: 15px;
+    margin: 0 auto 15px;
 }
 
 @keyframes spin {
@@ -78,49 +108,32 @@ p {
     100% { transform: rotate(360deg); }
 }
 
-.loader-hidden {
+.loading-overlay p {
+    color: #333;
+    font-weight: bold;
+}
+
+.hidden {
     display: none !important;
 }
 
-/* Khu vực thông báo kết quả */
-#resultMessage {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #3b0000; /* Màu nền nổi bật cho lỗi */
-    border: 1px solid #ff4d4d;
-    border-radius: 8px;
-    animation: fadeIn 0.5s ease-out;
-}
-
-.message-hidden {
-    display: none;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.zalo-link {
-    display: inline-flex;
-    align-items: center;
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #008cff; /* Màu Zalo */
-    color: white;
-    text-decoration: none;
+/* --- Key Result CSS --- */
+.key-result {
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px dashed #007bff;
     border-radius: 5px;
+    background-color: #e9f7ff;
+}
+
+.key-result h2 {
+    color: #007bff;
+    font-size: 1.2em;
+}
+
+#generated-key {
+    font-size: 1.1em;
     font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.zalo-link:hover {
-    background-color: #0077d9;
-}
-
-.zalo-link img {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    border-radius: 3px;
+    color: #333;
+    word-break: break-all;
 }

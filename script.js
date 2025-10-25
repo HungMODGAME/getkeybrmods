@@ -1,32 +1,48 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const generateKeyBtn = document.getElementById('generateKeyBtn');
-    const loader = document.getElementById('loader');
-    const resultMessage = document.getElementById('resultMessage');
-    const ZALO_DELAY_MS = 5000; // 5 giây
+document.getElementById('key-generator-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Ngăn chặn form submit mặc định
 
-    generateKeyBtn.addEventListener('click', () => {
-        // 1. Ẩn thông báo lỗi nếu có
-        resultMessage.classList.add('message-hidden');
+    // Ẩn kết quả cũ (nếu có)
+    document.getElementById('key-result').classList.add('hidden');
+    document.getElementById('generated-key').textContent = '';
 
-        // 2. Vô hiệu hóa nút và hiện vòng tròn loading
-        generateKeyBtn.disabled = true;
-        generateKeyBtn.textContent = 'Đang Tạo...';
-        loader.classList.remove('loader-hidden');
+    // Lấy các giá trị nhập vào
+    const name = document.getElementById('name').value;
+    const password = document.getElementById('password').value;
+    const expiry = document.getElementById('expiry').value;
 
-        // 3. Thiết lập hẹn giờ để mô phỏng quá trình tạo key
-        setTimeout(() => {
-            // Sau 5 giây:
+    // Hiển thị loading overlay
+    const loadingOverlay = document.getElementById('loading-overlay');
+    loadingOverlay.classList.remove('hidden');
+    document.getElementById('generate-button').disabled = true; // Vô hiệu hóa nút
 
-            // 4. Ẩn vòng tròn loading
-            loader.classList.add('loader-hidden');
+    let countdown = 60;
+    const countdownElement = document.getElementById('countdown');
+    countdownElement.textContent = countdown;
 
-            // 5. Hiện thông báo lỗi
-            resultMessage.classList.remove('message-hidden');
+    // Thiết lập đếm ngược
+    const timer = setInterval(() => {
+        countdown--;
+        countdownElement.textContent = countdown;
 
-            // 6. Kích hoạt lại nút
-            generateKeyBtn.disabled = false;
-            generateKeyBtn.textContent = 'Tạo Key';
+        if (countdown <= 0) {
+            clearInterval(timer);
+            
+            // Ẩn loading overlay
+            loadingOverlay.classList.add('hidden');
+            document.getElementById('generate-button').disabled = false; // Kích hoạt lại nút
 
-        }, ZALO_DELAY_MS);
-    });
+            // Tạo một Key giả (dựa trên thông tin nhập vào)
+            const generatedKey = `KEY-${btoa(name + password + expiry)}-${Date.now()}`;
+
+            // Hiển thị Key
+            document.getElementById('generated-key').textContent = generatedKey;
+            document.getElementById('key-result').classList.remove('hidden');
+
+            alert('Tạo Key thành công!');
+        }
+    }, 1000); // Cập nhật mỗi 1 giây
 });
+
+/** * Ghi chú: Hàm btoa() trong JavaScript dùng để mã hóa Base64 đơn giản.
+ * Trong thực tế, bạn cần gọi API Server để tạo key an toàn và hợp lệ.
+ */

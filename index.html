@@ -3,31 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Key BR Mods</title>
+    <title>Admin Key</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="container">
-        <h1>Hệ Thống Get Key Tự Động</h1>
-        <p>Vui lòng click vào nút bên dưới để tạo key mới.</p>
-
-        <button id="generateKeyBtn">
-            Tạo Key
-        </button>
-
-        <div id="loader" class="loader-hidden">
-            <div class="spinner"></div>
-            <p>Đang xử lý, vui lòng chờ...</p>
+        <div class="header">
+            <img src="https://i.imgur.com/y8FYN6b.jpeg" alt="Logo Công Ty" class="logo">
+            <h1>Admin Key</h1>
         </div>
 
-        <div id="resultMessage" class="message-hidden">
-            <p><strong>Get Key Của Bạn Đã Lỗi 😥</strong></p>
-            <p>Hãy Click Vào Zalo Để Được Hỗ Trợ !!!</p>
-            <a href="https://zaloapp.com/qr/p/1i96fxkiiccc4?src=qr" target="_blank" class="zalo-link">
-                <img src="https://i.imgur.com/FmQF3la.png" alt="Zalo Logo">
-                Hỗ Trợ Zalo Ngay
-            </a>
+        <form id="key-generator-form">
+            <div class="input-group">
+                <label for="name">Username</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="input-group">
+                <label for="expiry">Select Days</label>
+                <input type="text" id="expiry" required>
+            </div>
+            <button type="submit" id="generate-button">Get Key</button>
+        </form>
+
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="spinner-container">
+                <div class="spinner"></div>
+                <p>Key đang tạo, vui lòng chờ... </p>
+            </div>
+        </div>
+
+        <div id="key-result" class="key-result hidden">
+            <h2>Key của bạn:</h2>
+            <p id="generated-key"></p>
         </div>
     </div>
 
